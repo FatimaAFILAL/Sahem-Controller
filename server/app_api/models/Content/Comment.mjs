@@ -1,0 +1,51 @@
+import mongoose from 'mongoose';
+import timestamps from 'mongoose-timestamp';
+import VoteSchema from './Vote';
+const Schema = mongoose.Schema;
+
+export const CommentSchema = new Schema({
+    owner: {
+        type: Schema.Types.ObjectId,
+        ref: 'Creator',
+    },
+    content: {
+        type: String
+    },
+    votes: {
+        type: [VoteSchema]
+    },
+    origin_post: {
+        type: Schema.Types.ObjectId,
+        ref: 'Post'
+    },
+    origin_project: {
+        type: Schema.Types.ObjectId,
+        ref: 'Article'
+    }
+    // origin_comment: {
+    //     type: Schema.Types.ObjectId,
+    //     ref: 'Comment'
+    // },
+    // subcomments_count: {
+    //     type: Number,
+    //     default: 0
+    // }
+});
+
+CommentSchema.methods.addVote = function (upVote, owner) {
+    this.votes.forEach(vote => {
+        if (vote.owner == owner) {
+            vote.upVote == upVote;
+            return;
+        }
+    });
+    vote = new Vote({ upVote, owner });
+    this.votes.push(vote);
+
+};
+
+
+
+CommentSchema.plugin(timestamps);
+CommentSchema.index({ createdAt: 1, updatedAt: 1 });
+export const Comment = mongoose.model('Comment', CommentSchema);
