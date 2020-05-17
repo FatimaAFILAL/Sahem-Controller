@@ -44,6 +44,7 @@ fs.readdir('upload', (err, files) => {
 // });
 app.engine('html', require('ejs').renderFile);
 app.set('view engine', 'html');
+app.set('views', __dirname + '/app/public');
 
 
 
