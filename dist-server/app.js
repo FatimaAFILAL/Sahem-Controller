@@ -31,6 +31,8 @@ var _stripe = _interopRequireDefault(require("stripe"));
 
 var _cors = _interopRequireDefault(require("cors"));
 
+var _fs = _interopRequireDefault(require("fs"));
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
 _dotenv["default"].config(); //connect to db
@@ -53,7 +55,15 @@ fs.readdir('upload', function (err, files) {
   files.forEach(function (file) {
     console.log(file);
   });
-});
+}); // let template = readFileSync(join(__dirname, '..', 'public', 'index.html')).toString();
+// app.engine('html', (_, options, callback) => {
+//     const opts = { document: template, url: options.req.url };
+//     renderModuleFactory(AppServerModuleNgFactory, opts)
+//         .then(html => callback(null, html));
+// });
+// app.set('view engine', 'html');
+
+app.engine('html', require('ejs').renderFile);
 app.use((0, _cookieParser["default"])());
 app.use(_express["default"]["static"](_path["default"].join(__dirname, 'public'))); // TOFO delete ../
 

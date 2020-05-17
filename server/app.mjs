@@ -14,6 +14,8 @@ import indexRouter from './app_server/routes/index';
 import authRouter from './app_server/routes/auth';
 import stripe from 'stripe';
 import cors from 'cors';
+import readFileSync from 'fs';
+
 dotenv.config();
 //connect to db
 stripe(process.env.STRIPE_SECRET_KEY);
@@ -33,14 +35,17 @@ fs.readdir('upload', (err, files) => {
     });
 });
 
-let template = readFileSync(join(__dirname, '..', 'public', 'index.html')).toString();
-app.engine('html', (_, options, callback) => {
-    const opts = { document: template, url: options.req.url };
+// let template = readFileSync(join(__dirname, '..', 'public', 'index.html')).toString();
+// app.engine('html', (_, options, callback) => {
+//     const opts = { document: template, url: options.req.url };
 
-    renderModuleFactory(AppServerModuleNgFactory, opts)
-        .then(html => callback(null, html));
-});
-app.set('view engine', 'html');
+//     renderModuleFactory(AppServerModuleNgFactory, opts)
+//         .then(html => callback(null, html));
+// });
+// app.set('view engine', 'html');
+app.engine('html', require('ejs').renderFile);
+
+
 
 
 app.use(cookieParser());

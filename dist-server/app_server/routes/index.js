@@ -13,7 +13,7 @@ var router = _express["default"].Router();
 
 router.route('/').get(function (req, res) {
   res.render('index', {
-    title: 'Express'
+    title: 'Sahem'
   });
 });
 var _default = router;
