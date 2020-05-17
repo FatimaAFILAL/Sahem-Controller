@@ -33,6 +33,7 @@ fs.readdir('upload', (err, files) => {
     });
 });
 
+app.engine('html', require('ejs').renderFile);
 
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
