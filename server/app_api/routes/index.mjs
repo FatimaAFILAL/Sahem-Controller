@@ -2,7 +2,7 @@ import express from 'express';
 // import { authenticateJWT } from '../../middleware/authenticateJWT';
 import passport from 'passport';
 const router = express.Router();
-import { projectsList, projectsCreate, projectsDeleteOne } from '../controllers/projects';
+import { projectsList, projectsCreate, projectsDeleteOne, projectsReadOne, projectsUpdateOne } from '../controllers/projects';
 import { creatorsList, creatorsCreate, creatorsReadOne, creatorsUpdateOne } from '../controllers/Creators';
 import { fundsCreate } from '../controllers/Fund';
 import { getCreator } from '../../middleware/creatorGetter';
@@ -39,11 +39,11 @@ router
 router
     .route('/projects/:projectid')
     .get((req, res) => {
-        ctrlProjects.projectsReadOne(req, res);
+        projectsReadOne(req, res);
     })
     .put(passport.authenticate('jwt', { session: false }), upload.fields([{ name: 'header_image', maxCount: 1 }, { name: 'thumbnail', maxCount: 1 }]), (req, res) => {
         // upload.fields([{ name: 'header_image', maxCount: 1 }, { name: 'thumbnail', maxCount: 1 }]);
-        ctrlProjects.projectsUpdateOne(req, res);
+        projectsUpdateOne(req, res);
     })
     .delete(passport.authenticate('jwt', { session: false }), (req, res) => {
         projectsDeleteOne(req, res);
