@@ -1,5 +1,10 @@
 "use strict";
 
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.creatorsProfileRead = exports.creatorsReadOne = exports.creatorsDeleteOne = exports.creatorsUpdateOne = exports.creatorsCreate = exports.creatorsList = void 0;
+
 var _mongoose = _interopRequireDefault(require("mongoose"));
 
 var _Creator = require("../models/User/Creator");
@@ -25,6 +30,8 @@ var creatorsList = function creatorsList(req, res) {
     }
   });
 };
+
+exports.creatorsList = creatorsList;
 
 var creatorsCreate = function creatorsCreate(req, res) {
   //avatar
@@ -69,6 +76,8 @@ var creatorsCreate = function creatorsCreate(req, res) {
   });
 };
 
+exports.creatorsCreate = creatorsCreate;
+
 var creatorsUpdateOne = function creatorsUpdateOne(req, res) {
   _Creator.Creator.findById(req.creator._id).execc(function (err, creator) {
     if (err) {
@@ -109,6 +118,8 @@ var creatorsUpdateOne = function creatorsUpdateOne(req, res) {
   });
 };
 
+exports.creatorsUpdateOne = creatorsUpdateOne;
+
 var creatorsDeleteOne = function creatorsDeleteOne(req, res) {
   var creatorid = req.params.creatorid;
 
@@ -142,6 +153,8 @@ var creatorsDeleteOne = function creatorsDeleteOne(req, res) {
 // };
 
 
+exports.creatorsDeleteOne = creatorsDeleteOne;
+
 var creatorsReadOne = function creatorsReadOne(req, res) {
   _Creator.Creator.findById(req.params.creatorid).exec(function (err, creator) {
     if (!creator) {
@@ -156,6 +169,8 @@ var creatorsReadOne = function creatorsReadOne(req, res) {
   });
 };
 
+exports.creatorsReadOne = creatorsReadOne;
+
 var creatorsProfileRead = function creatorsProfileRead(req, res) {
   var userid = req.user._id.userid;
 
@@ -164,13 +179,14 @@ var creatorsProfileRead = function creatorsProfileRead(req, res) {
   res.json({
     creator: creator
   });
-};
+}; // module.exports = {
+//     creatorsList,
+//     creatorsCreate,
+//     creatorsReadOne,
+//     creatorsUpdateOne,
+//     creatorsDeleteOne,
+//     creatorsProfileRead
+// };
 
-module.exports = {
-  creatorsList: creatorsList,
-  creatorsCreate: creatorsCreate,
-  creatorsReadOne: creatorsReadOne,
-  creatorsUpdateOne: creatorsUpdateOne,
-  creatorsDeleteOne: creatorsDeleteOne,
-  creatorsProfileRead: creatorsProfileRead
-};
+
+exports.creatorsProfileRead = creatorsProfileRead;

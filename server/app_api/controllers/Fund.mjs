@@ -4,7 +4,7 @@ import { Project } from "../models/Content/Project";
 import stripe from 'stripe';
 stripe(process.env.STRIPE_SECRET_KEY);
 // const Project = mongoose.model("Project");
-const fundsCreate = (req, res) => {
+export const fundsCreate = (req, res) => {
     //avatar
     // if (req.file) avatar = req.file;
     // TODO check req.params.projectid if it's a real project and the project exist
@@ -65,6 +65,6 @@ const fundsCreate = (req, res) => {
         });
 };
 
-module.exports = {
-    fundsCreate
-};
+// module.exports = {
+//     fundsCreate
+// };

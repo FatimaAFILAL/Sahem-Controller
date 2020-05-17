@@ -1,5 +1,10 @@
 "use strict";
 
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.projectsDeleteOne = exports.projectsUpdateOne = exports.projectsReadOne = exports.projectsCreate = exports.projectsList = void 0;
+
 var _mongoose = _interopRequireDefault(require("mongoose"));
 
 var _Project = require("../models/Content/Project");
@@ -24,6 +29,8 @@ var projectsList = function projectsList(req, res) {
     }
   });
 };
+
+exports.projectsList = projectsList;
 
 var projectsCreate = function projectsCreate(req, res) {
   // const header_image = '';
@@ -59,6 +66,8 @@ var projectsCreate = function projectsCreate(req, res) {
   });
 };
 
+exports.projectsCreate = projectsCreate;
+
 var projectsReadOne = function projectsReadOne(req, res) {
   _Project.Project.findById(req.params.projectid).exec(function (err, project) {
     if (!project) {
@@ -72,6 +81,8 @@ var projectsReadOne = function projectsReadOne(req, res) {
     return res.status(200).json(project);
   });
 };
+
+exports.projectsReadOne = projectsReadOne;
 
 var projectsUpdateOne = function projectsUpdateOne(req, res) {
   _Project.Project.findById(req.body.projectid).exec(function (err, project) {
@@ -131,6 +142,8 @@ var projectsUpdateOne = function projectsUpdateOne(req, res) {
   });
 };
 
+exports.projectsUpdateOne = projectsUpdateOne;
+
 var projectsDeleteOne = function projectsDeleteOne(req, res) {
   var projectid = req.params.projectid; //TODO delete project id from the creator's projects
 
@@ -168,12 +181,13 @@ var projectsDeleteOne = function projectsDeleteOne(req, res) {
   //     }
   //     );
 
-};
+}; // module.exports = {
+//     projectsList,
+//     projectsCreate,
+//     projectsReadOne,
+//     projectsUpdateOne,
+//     projectsDeleteOne
+// };
 
-module.exports = {
-  projectsList: projectsList,
-  projectsCreate: projectsCreate,
-  projectsReadOne: projectsReadOne,
-  projectsUpdateOne: projectsUpdateOne,
-  projectsDeleteOne: projectsDeleteOne
-};
+
+exports.projectsDeleteOne = projectsDeleteOne;

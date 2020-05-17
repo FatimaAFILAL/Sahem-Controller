@@ -9,11 +9,11 @@ var _express = _interopRequireDefault(require("express"));
 
 var _passport = _interopRequireDefault(require("passport"));
 
-var _projects = _interopRequireDefault(require("../controllers/projects"));
+var _projects = require("../controllers/projects");
 
-var _Creators = _interopRequireDefault(require("../controllers/Creators"));
+var _Creators = require("../controllers/Creators");
 
-var _Fund = _interopRequireDefault(require("../controllers/Fund"));
+var _Fund = require("../controllers/Fund");
 
 var _creatorGetter = require("../../middleware/creatorGetter");
 
@@ -51,7 +51,7 @@ router.route('/').get(function (req, res) {
   });
 });
 router.route('/projects').get(function (req, res) {
-  _projects["default"].projectsList(req, res);
+  (0, _projects.projectsList)(req, res);
 }).post(_passport["default"].authenticate('jwt', {
   session: false
 }), _creatorGetter.getCreator, _upload.upload.fields([{
@@ -66,10 +66,10 @@ router.route('/projects').get(function (req, res) {
   // upload.fields([{ name: 'header_image', maxCount: 1 }, { name: 'thumbnail', maxCount: 1 }]);
   // upload.single('header_image');
   // console.log(req);
-  _projects["default"].projectsCreate(req, res);
+  (0, _projects.projectsCreate)(req, res);
 });
 router.route('/projects/:projectid').get(function (req, res) {
-  _projects["default"].projectsReadOne(req, res);
+  ctrlProjects.projectsReadOne(req, res);
 }).put(_passport["default"].authenticate('jwt', {
   session: false
 }), _upload.upload.fields([{
@@ -80,11 +80,11 @@ router.route('/projects/:projectid').get(function (req, res) {
   maxCount: 1
 }]), function (req, res) {
   // upload.fields([{ name: 'header_image', maxCount: 1 }, { name: 'thumbnail', maxCount: 1 }]);
-  _projects["default"].projectsUpdateOne(req, res);
+  ctrlProjects.projectsUpdateOne(req, res);
 })["delete"](_passport["default"].authenticate('jwt', {
   session: false
 }), function (req, res) {
-  _projects["default"].projectsDeleteOne(req, res);
+  (0, _projects.projectsDeleteOne)(req, res);
 }); // async function customerCreator(req, res) {
 //     var customer = await stripe.customers.create(
 //         {
@@ -148,7 +148,7 @@ router.route('/projects/:projectid/fund').post(jsonParser, urlParser, _passport[
       req.customer = customer;
       console.log(customer);
     }).then(function () {
-      _Fund["default"].fundsCreate(req, res);
+      (0, _Fund.fundsCreate)(req, res);
     })["catch"](function (err) {
       return console.log(err);
     }); // console.log(customer);
@@ -163,21 +163,20 @@ router.route('/projects/:projectid/fund').post(jsonParser, urlParser, _passport[
 //     })
 
 router.route('/creators').get(function (req, res) {
-  _Creators["default"].creatorsList(req, res);
+  (0, _Creators.creatorsList)(req, res);
 }).post(jsonParser, urlParser, _passport["default"].authenticate('jwt', {
   session: false
 }), _upload.upload.single('avatar'), function (req, res) {
   // getCreator(req, res);
   console.log(req.file);
-
-  _Creators["default"].creatorsCreate(req, res);
+  (0, _Creators.creatorsCreate)(req, res);
 }); // .put(passport.authenticate('jwt', { session: false }), (req, res) => {
 //     getCreator(req, res);
 //     ctrlCreators.creatorsUpdateOne(req, res);
 // });
 
 router.route('/creators/:creatorid').get(function (req, res) {
-  _Creators["default"].creatorsReadOne(req, res);
+  (0, _Creators.creatorsReadOne)(req, res);
 }); // .put(passport.authenticate('jwt', { session: false }), (req, res) => {
 //     const { creatorid } = req.params;
 //     getCreator(req, res);
@@ -220,7 +219,7 @@ router.route('/profile').post(jsonParser, urlParser, _passport["default"].authen
   //         );
   // }
 
-  _Creators["default"].creatorsUpdateOne(req, res);
+  (0, _Creators.creatorsUpdateOne)(req, res);
 });
 var _default = router; // module.exports = router;
 

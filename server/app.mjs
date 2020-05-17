@@ -14,7 +14,8 @@ import indexRouter from './app_server/routes/index';
 import authRouter from './app_server/routes/auth';
 import stripe from 'stripe';
 import cors from 'cors';
-import readFileSync from 'fs';
+// import readFileSync from 'fs';
+const fs = require('fs');
 
 dotenv.config();
 //connect to db
@@ -24,10 +25,9 @@ require('./app_api/config/passport');
 //init app
 const app = express();
 app.use(logger('dev'));
-// app.use(bodyParser.json());
-// app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 
-const fs = require('fs');
 
 fs.readdir('upload', (err, files) => {
     files.forEach(file => {
@@ -57,15 +57,16 @@ app.use(passport.initialize());
 app.use(helmet());
 app.use(cors());
 //define routes
-// app.use('/', indexRouter);
-app.use('/auth', authRouter);
-app.use('/api', apiRouter);
 app.get('*.*', (req, res) => {
     res.sendFile(path.join(__dirname, '/../public'));
 });
 app.get('/', function (req, res) {
     res.render(__dirname + '/../public/index.html');
 });
+
+// app.use('/', indexRouter);
+app.use('/auth', authRouter);
+app.use('/api', apiRouter);
 
 //TODO route to get, create and edit creators info
 // app.use('/creators', creatorsRouter);

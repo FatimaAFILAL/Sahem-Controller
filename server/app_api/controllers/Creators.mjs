@@ -4,7 +4,7 @@ import mongoose from "mongoose";
 import { Creator } from "../models/User/Creator";
 import { PersonalInformation } from "../models/User/PersonalInformation";
 
-const creatorsList = (req, res) => {
+export const creatorsList = (req, res) => {
     Creator
         .find({}, '', (error, creators) => {
             if (error) { console.error(error); }
@@ -24,7 +24,7 @@ const creatorsList = (req, res) => {
 
 
 };
-const creatorsCreate = (req, res) => {
+export const creatorsCreate = (req, res) => {
     //avatar
     const avatar = '';
     // if (req.file) avatar = req.file;
@@ -71,7 +71,7 @@ const creatorsCreate = (req, res) => {
             }
         });
 };
-const creatorsUpdateOne = (req, res) => {
+export const creatorsUpdateOne = (req, res) => {
  
     Creator
         .findById(req.creator._id)
@@ -121,7 +121,7 @@ const creatorsUpdateOne = (req, res) => {
             })
         })
 };
-const creatorsDeleteOne = (req, res) => {
+export const creatorsDeleteOne = (req, res) => {
     const { creatorid } = req.params;
     if (creatorid) {
         Creator
@@ -165,7 +165,7 @@ const creatorsDeleteOne = (req, res) => {
 //     });
 // };
 
-const creatorsReadOne = (req, res) => {
+export const creatorsReadOne = (req, res) => {
     Creator
         .findById(req.params.creatorid)
         .exec((err, creator) => {
@@ -189,7 +189,7 @@ const creatorsReadOne = (req, res) => {
 };
 
 
-const creatorsProfileRead = (req, res) => {
+export const creatorsProfileRead = (req, res) => {
     const { userid } = req.user._id;
 
     const creator = Creator.getCreatorByUserId(userid);
@@ -198,11 +198,11 @@ const creatorsProfileRead = (req, res) => {
     });
 };
 
-module.exports = {
-    creatorsList,
-    creatorsCreate,
-    creatorsReadOne,
-    creatorsUpdateOne,
-    creatorsDeleteOne,
-    creatorsProfileRead
-};
+// module.exports = {
+//     creatorsList,
+//     creatorsCreate,
+//     creatorsReadOne,
+//     creatorsUpdateOne,
+//     creatorsDeleteOne,
+//     creatorsProfileRead
+// };

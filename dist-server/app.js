@@ -31,9 +31,10 @@ var _stripe = _interopRequireDefault(require("stripe"));
 
 var _cors = _interopRequireDefault(require("cors"));
 
-var _fs = _interopRequireDefault(require("fs"));
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
+
+// import readFileSync from 'fs';
+var fs = require('fs');
 
 _dotenv["default"].config(); //connect to db
 
@@ -46,11 +47,11 @@ require('./app_api/config/passport'); //init app
 
 
 var app = (0, _express["default"])();
-app.use((0, _morgan["default"])('dev')); // app.use(bodyParser.json());
-// app.use(bodyParser.urlencoded({ extended: true }));
-
-var fs = require('fs');
-
+app.use((0, _morgan["default"])('dev'));
+app.use(_bodyParser["default"].json());
+app.use(_bodyParser["default"].urlencoded({
+  extended: true
+}));
 fs.readdir('upload', function (err, files) {
   files.forEach(function (file) {
     console.log(file);
@@ -72,16 +73,16 @@ app.use('/upload', _express["default"]["static"](_path["default"].join(__dirname
 app.use(_passport["default"].initialize());
 app.use((0, _helmet["default"])());
 app.use((0, _cors["default"])()); //define routes
-// app.use('/', indexRouter);
 
-app.use('/auth', _auth["default"]);
-app.use('/api', _index["default"]);
 app.get('*.*', function (req, res) {
   res.sendFile(_path["default"].join(__dirname, '/../public'));
 });
 app.get('/', function (req, res) {
   res.render(__dirname + '/../public/index.html');
-}); //TODO route to get, create and edit creators info
+}); // app.use('/', indexRouter);
+
+app.use('/auth', _auth["default"]);
+app.use('/api', _index["default"]); //TODO route to get, create and edit creators info
 // app.use('/creators', creatorsRouter);
 //TODO route to edit user info
 // app.use('/user', userRouter);

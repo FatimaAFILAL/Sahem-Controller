@@ -2,9 +2,9 @@ import express from 'express';
 // import { authenticateJWT } from '../../middleware/authenticateJWT';
 import passport from 'passport';
 const router = express.Router();
-import ctrlProjects from '../controllers/projects';
-import ctrlCreators from '../controllers/Creators';
-import ctrlFunds from '../controllers/Fund';
+import { projectsList, projectsCreate, projectsDeleteOne } from '../controllers/projects';
+import { creatorsList, creatorsCreate, creatorsReadOne, creatorsUpdateOne } from '../controllers/Creators';
+import { fundsCreate } from '../controllers/Fund';
 import { getCreator } from '../../middleware/creatorGetter';
 import bodyParser from 'body-parser';
 import stripe from 'stripe';
@@ -26,7 +26,7 @@ router
 router
     .route('/projects')
     .get((req, res) => {
-        ctrlProjects.projectsList(req, res);
+        projectsList(req, res);
     })
     .post(passport.authenticate('jwt', { session: false }), getCreator, upload.fields([{ name: 'header_image', maxCount: 1 }, { name: 'thumbnail', maxCount: 1 }]), (req, res) => {
         // getCreator(req, res);
@@ -34,7 +34,7 @@ router
         // upload.fields([{ name: 'header_image', maxCount: 1 }, { name: 'thumbnail', maxCount: 1 }]);
         // upload.single('header_image');
         // console.log(req);
-        ctrlProjects.projectsCreate(req, res);
+        projectsCreate(req, res);
     });
 router
     .route('/projects/:projectid')
@@ -46,7 +46,7 @@ router
         ctrlProjects.projectsUpdateOne(req, res);
     })
     .delete(passport.authenticate('jwt', { session: false }), (req, res) => {
-        ctrlProjects.projectsDeleteOne(req, res);
+        projectsDeleteOne(req, res);
     });
 
 
@@ -116,7 +116,7 @@ router
                 }
                 )
                 .then(() => {
-                    ctrlFunds.fundsCreate(req, res);
+                    fundsCreate(req, res);
                 })
                 .catch(err => console.log(err));
             // console.log(customer);
@@ -139,14 +139,14 @@ router
     .route('/creators')
     .get((req, res) => {
 
-        ctrlCreators.creatorsList(req, res);
+        creatorsList(req, res);
 
     })
     .post(jsonParser, urlParser, passport.authenticate('jwt', { session: false }), upload.single('avatar'), (req, res) => {
         // getCreator(req, res);
         console.log(req.file);
 
-        ctrlCreators.creatorsCreate(req, res);
+        creatorsCreate(req, res);
     });
 // .put(passport.authenticate('jwt', { session: false }), (req, res) => {
 //     getCreator(req, res);
@@ -155,7 +155,7 @@ router
 router
     .route('/creators/:creatorid')
     .get((req, res) => {
-        ctrlCreators.creatorsReadOne(req, res);
+        creatorsReadOne(req, res);
     });
 // .put(passport.authenticate('jwt', { session: false }), (req, res) => {
 //     const { creatorid } = req.params;
@@ -202,7 +202,7 @@ router
         //             }
         //         );
         // }
-        ctrlCreators.creatorsUpdateOne(req, res);
+        creatorsUpdateOne(req, res);
     });
 
 

@@ -1,5 +1,10 @@
 "use strict";
 
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.fundsCreate = void 0;
+
 var _mongoose = _interopRequireDefault(require("mongoose"));
 
 var _fund = require("../models/fund/fund");
@@ -61,8 +66,9 @@ var fundsCreate = function fundsCreate(req, res) {
       });
     }
   });
-};
+}; // module.exports = {
+//     fundsCreate
+// };
 
-module.exports = {
-  fundsCreate: fundsCreate
-};
+
+exports.fundsCreate = fundsCreate;

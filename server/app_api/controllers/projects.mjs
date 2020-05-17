@@ -2,7 +2,7 @@ import mongoose from 'mongoose';
 import { Project } from "../models/Content/Project";
 import { Creator } from '../models/User/Creator';
 // const Project = require('../models/Content/project').Project;
-const projectsList = (req, res) => {
+export const projectsList = (req, res) => {
     Project
         .find({}, '', (error, projects) => {
             if (error) { console.error(error); }
@@ -23,7 +23,7 @@ const projectsList = (req, res) => {
 
 };
 
-const projectsCreate = (req, res) => {
+export const projectsCreate = (req, res) => {
     // const header_image = '';
     // if (req.files['header_image'][0]) {
     //     header_image = req.files['header_image'][0];
@@ -60,7 +60,7 @@ const projectsCreate = (req, res) => {
             }
         });
 };
-const projectsReadOne = (req, res) => {
+export const projectsReadOne = (req, res) => {
     Project
         .findById(req.params.projectid)
         .exec((err, project) => {
@@ -82,7 +82,7 @@ const projectsReadOne = (req, res) => {
 
 
 };
-const projectsUpdateOne = (req, res) => {
+export const projectsUpdateOne = (req, res) => {
 
     Project
         .findById(req.body.projectid)
@@ -150,7 +150,7 @@ const projectsUpdateOne = (req, res) => {
             })
         })
 };
-const projectsDeleteOne = (req, res) => {
+export const projectsDeleteOne = (req, res) => {
     const { projectid } = req.params;
     //TODO delete project id from the creator's projects
     if (projectid) {
@@ -199,10 +199,10 @@ const projectsDeleteOne = (req, res) => {
 
 
 
-module.exports = {
-    projectsList,
-    projectsCreate,
-    projectsReadOne,
-    projectsUpdateOne,
-    projectsDeleteOne
-};
+// module.exports = {
+//     projectsList,
+//     projectsCreate,
+//     projectsReadOne,
+//     projectsUpdateOne,
+//     projectsDeleteOne
+// };
