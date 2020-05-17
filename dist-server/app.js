@@ -61,23 +61,27 @@ fs.readdir('upload', function (err, files) {
 //     renderModuleFactory(AppServerModuleNgFactory, opts)
 //         .then(html => callback(null, html));
 // });
-// app.set('view engine', 'html');
 
 app.engine('html', require('ejs').renderFile);
+app.set('view engine', 'html');
+app.set('views', __dirname + '/../public');
 app.use((0, _cookieParser["default"])());
-app.use(_express["default"]["static"](_path["default"].join(__dirname, 'public'))); // TOFO delete ../
+app.use(_express["default"]["static"](_path["default"].join(__dirname, '/../public'))); // TOFO delete ../
 
 app.use('/upload', _express["default"]["static"](_path["default"].join(__dirname, 'upload')));
 app.use(_passport["default"].initialize());
 app.use((0, _helmet["default"])());
 app.use((0, _cors["default"])()); //define routes
+// app.use('/', indexRouter);
 
-app.use('/', _index2["default"]);
 app.use('/auth', _auth["default"]);
-app.use('/api', _index["default"]); // app.get('/*', (req, res) => {
-//     res.sendFile(path.join(__dirname, '../../../Sahem-Views/Sahem-WA/Sahem/dist/Sahem/index.html'));
-// });
-//TODO route to get, create and edit creators info
+app.use('/api', _index["default"]);
+app.get('*.*', function (req, res) {
+  res.sendFile(_path["default"].join(__dirname, '/../public'));
+});
+app.get('/', function (req, res) {
+  res.render(__dirname + '/../public/index.html');
+}); //TODO route to get, create and edit creators info
 // app.use('/creators', creatorsRouter);
 //TODO route to edit user info
 // app.use('/user', userRouter);

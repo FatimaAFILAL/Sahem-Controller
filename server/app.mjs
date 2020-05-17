@@ -50,19 +50,23 @@ app.set('views', __dirname + '/../public');
 
 
 app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, '/../public')));
 // TOFO delete ../
 app.use('/upload', express.static(path.join(__dirname, 'upload')));
 app.use(passport.initialize());
 app.use(helmet());
 app.use(cors());
 //define routes
-app.use('/', indexRouter);
+// app.use('/', indexRouter);
 app.use('/auth', authRouter);
 app.use('/api', apiRouter);
-// app.get('/*', (req, res) => {
-//     res.sendFile(path.join(__dirname, '../../../Sahem-Views/Sahem-WA/Sahem/dist/Sahem/index.html'));
-// });
+app.get('*.*', (req, res) => {
+    res.sendFile(path.join(__dirname, '/../public'));
+});
+app.get('/', function (req, res) {
+    res.render(__dirname + '/../public/index.html');
+});
+
 //TODO route to get, create and edit creators info
 // app.use('/creators', creatorsRouter);
 //TODO route to edit user info
