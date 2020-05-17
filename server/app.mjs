@@ -33,7 +33,15 @@ fs.readdir('upload', (err, files) => {
     });
 });
 
-app.engine('html', require('ejs').renderFile);
+let template = readFileSync(join(__dirname, '..', 'public', 'index.html')).toString();
+app.engine('html', (_, options, callback) => {
+    const opts = { document: template, url: options.req.url };
+
+    renderModuleFactory(AppServerModuleNgFactory, opts)
+        .then(html => callback(null, html));
+});
+app.set('view engine', 'html');
+
 
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
