@@ -42,8 +42,8 @@ fs.readdir('upload', (err, files) => {
 //     renderModuleFactory(AppServerModuleNgFactory, opts)
 //         .then(html => callback(null, html));
 // });
-// app.set('view engine', 'html');
 app.engine('html', require('ejs').renderFile);
+app.set('view engine', 'html');
 
 
 
