@@ -32,7 +32,7 @@ export const projectsCreate = (req, res) => {
     // if (req.files['thumbnail'][0]) {
     //     thumbnail = req.files['thumbnail'][0];
     // }
-    console.log("req.files");
+    // console.log("req.files");
     Project
         .create({
             owner: req.creator._id,

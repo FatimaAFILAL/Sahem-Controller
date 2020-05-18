@@ -36,8 +36,7 @@ exports.creatorsList = creatorsList;
 var creatorsCreate = function creatorsCreate(req, res) {
   //avatar
   var avatar = ''; // if (req.file) avatar = req.file;
-
-  console.log(req.file);
+  // console.log(req.file);
 
   _Creator.Creator.create({
     user_id: req.user._id,

@@ -28,7 +28,7 @@ export const creatorsCreate = (req, res) => {
     //avatar
     const avatar = '';
     // if (req.file) avatar = req.file;
-    console.log(req.file);
+    // console.log(req.file);
     Creator
         .create({
             user_id: req.user._id,

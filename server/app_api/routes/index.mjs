@@ -33,7 +33,7 @@ router
         // upload.any(); upload.single('header_image'),
         // upload.fields([{ name: 'header_image', maxCount: 1 }, { name: 'thumbnail', maxCount: 1 }]);
         // upload.single('header_image');
-        console.log(req);
+        // console.log(req);
         projectsCreate(req, res);
     });
 router
