@@ -69,7 +69,7 @@ app.set('views', __dirname + '/../public');
 app.use((0, _cookieParser["default"])());
 app.use(_express["default"]["static"](_path["default"].join(__dirname, '/../public'))); // TOFO delete ../
 
-app.use('/upload', _express["default"]["static"](_path["default"].join(__dirname, 'upload')));
+app.use('/upload', _express["default"]["static"](_path["default"].join(__dirname, '/../../upload')));
 app.use(_passport["default"].initialize());
 app.use((0, _helmet["default"])());
 app.use((0, _cors["default"])()); //define routes

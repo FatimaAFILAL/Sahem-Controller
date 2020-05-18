@@ -69,7 +69,7 @@ router.route('/projects').get(function (req, res) {
   (0, _projects.projectsCreate)(req, res);
 });
 router.route('/projects/:projectid').get(function (req, res) {
-  ctrlProjects.projectsReadOne(req, res);
+  (0, _projects.projectsReadOne)(req, res);
 }).put(_passport["default"].authenticate('jwt', {
   session: false
 }), _upload.upload.fields([{
@@ -80,7 +80,7 @@ router.route('/projects/:projectid').get(function (req, res) {
   maxCount: 1
 }]), function (req, res) {
   // upload.fields([{ name: 'header_image', maxCount: 1 }, { name: 'thumbnail', maxCount: 1 }]);
-  ctrlProjects.projectsUpdateOne(req, res);
+  (0, _projects.projectsUpdateOne)(req, res);
 })["delete"](_passport["default"].authenticate('jwt', {
   session: false
 }), function (req, res) {

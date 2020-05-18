@@ -52,7 +52,7 @@ app.set('views', __dirname + '/../public');
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, '/../public')));
 // TOFO delete ../
-app.use('/upload', express.static(path.join(__dirname, '/../../../upload')));
+app.use('/upload', express.static(path.join(__dirname, '/../upload')));
 app.use(passport.initialize());
 app.use(helmet());
 app.use(cors());

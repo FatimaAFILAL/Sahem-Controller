@@ -17,7 +17,7 @@ var url = process.env.DB_URL;
 
 var storage = _multer["default"].diskStorage({
   destination: function destination(req, file, cb) {
-    cb(null, 'upload/');
+    cb(null, __dirname + '/../../upload/');
   },
   filename: function filename(req, file, cb) {
     cb(null, file.fieldname + '-' + Date.now());
