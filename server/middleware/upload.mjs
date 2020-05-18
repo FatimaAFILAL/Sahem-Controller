@@ -4,7 +4,7 @@ import GridFsStorage from "multer-gridfs-storage";
 const url = process.env.DB_URL;
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
-        cb(null, '/../../upload/');
+        cb(null,  './upload/');
     },
     filename: function (req, file, cb) {
         cb(null, file.fieldname + '-' + Date.now());

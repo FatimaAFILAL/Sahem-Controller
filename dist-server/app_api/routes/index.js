@@ -65,7 +65,7 @@ router.route('/projects').get(function (req, res) {
   // upload.any(); upload.single('header_image'),
   // upload.fields([{ name: 'header_image', maxCount: 1 }, { name: 'thumbnail', maxCount: 1 }]);
   // upload.single('header_image');
-  // console.log(req);
+  console.log(req);
   (0, _projects.projectsCreate)(req, res);
 });
 router.route('/projects/:projectid').get(function (req, res) {

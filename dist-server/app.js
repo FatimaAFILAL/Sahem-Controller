@@ -47,11 +47,9 @@ require('./app_api/config/passport'); //init app
 
 
 var app = (0, _express["default"])();
-app.use((0, _morgan["default"])('dev'));
-app.use(_bodyParser["default"].json());
-app.use(_bodyParser["default"].urlencoded({
-  extended: true
-}));
+app.use((0, _morgan["default"])('dev')); // app.use(bodyParser.json());
+// app.use(bodyParser.urlencoded({ extended: true }));
+
 fs.readdir('upload', function (err, files) {
   files.forEach(function (file) {
     console.log(file);
@@ -69,7 +67,7 @@ app.set('views', __dirname + '/../public');
 app.use((0, _cookieParser["default"])());
 app.use(_express["default"]["static"](_path["default"].join(__dirname, '/../public'))); // TOFO delete ../
 
-app.use('/upload', _express["default"]["static"](_path["default"].join(__dirname, '/../../upload')));
+app.use('/upload', _express["default"]["static"](_path["default"].join(__dirname, '/../upload')));
 app.use(_passport["default"].initialize());
 app.use((0, _helmet["default"])());
 app.use((0, _cors["default"])()); //define routes

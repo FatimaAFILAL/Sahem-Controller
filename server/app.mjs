@@ -25,8 +25,8 @@ require('./app_api/config/passport');
 //init app
 const app = express();
 app.use(logger('dev'));
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
+// app.use(bodyParser.json());
+// app.use(bodyParser.urlencoded({ extended: true }));
 
 
 fs.readdir('upload', (err, files) => {
