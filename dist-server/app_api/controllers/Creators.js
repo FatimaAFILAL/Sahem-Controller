@@ -45,6 +45,7 @@ var creatorsCreate = function creatorsCreate(req, res) {
     avatar: req.file
   }, function (err, creator) {
     if (err) {
+      console.log(err);
       res.status(404).json(err);
     } else {
       var personal_information = new _PersonalInformation.PersonalInformation();

@@ -23,12 +23,12 @@ var Schema = _mongoose["default"].Schema; //Project schema
 
 var ProjectSchema = new Schema({
   title: {
-    type: String // required: true
-
+    type: String,
+    required: true
   },
   category: {
-    type: String // required: true
-
+    type: String,
+    required: true
   },
   owner: {
     type: Schema.Types.ObjectId,
@@ -36,13 +36,16 @@ var ProjectSchema = new Schema({
 
   },
   content: {
-    type: String
+    type: String,
+    required: true
   },
   description: {
-    type: String
+    type: String,
+    required: true
   },
   fundGoal: {
-    type: Number
+    type: Number,
+    required: true
   },
   raisedFunds: {
     type: Number,
@@ -53,7 +56,8 @@ var ProjectSchema = new Schema({
   //     default: Date.now()
   // },
   endDate: {
-    type: Date
+    type: Date,
+    required: true
   },
   funders: [{
     _id: {

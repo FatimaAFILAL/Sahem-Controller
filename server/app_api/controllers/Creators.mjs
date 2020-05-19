@@ -37,6 +37,7 @@ export const creatorsCreate = (req, res) => {
             avatar: req.file
         }, (err, creator) => {
             if (err) {
+                console.log(err);
                 res
                     .status(404)
                     .json(err);

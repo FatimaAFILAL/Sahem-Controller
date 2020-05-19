@@ -14,7 +14,8 @@ export const CreatorSchema = new Schema({
     },
     creator_tag: {
         type: String,
-        unique: true
+        unique: true,
+        required: true
 
     },
     personal_information: 
@@ -44,6 +45,7 @@ export const CreatorSchema = new Schema({
     },
     bio: {
         type: String,
+        required: true
     },
     projects: {
         type: [Schema.Types.ObjectId],

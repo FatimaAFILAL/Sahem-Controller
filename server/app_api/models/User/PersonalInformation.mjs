@@ -8,16 +8,23 @@ export const PersonalInformationSchema = new Schema({
         ref:'Creator'
     },
     first_name: {
-        type: String
+        type: String,
+        required: true
+
     },
     last_name: {
-        type: String
+        type: String,
+        required: true
     },
     birthday: {
-        type: Date
+        type: Date,
+        required: true
+
     },
     address: {
-        type: String
+        type: String,
+        required: true
+        
     }
 });
 PersonalInformationSchema.plugin(timestamps);

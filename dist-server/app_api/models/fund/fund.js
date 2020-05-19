@@ -15,17 +15,17 @@ var Schema = _mongoose["default"].Schema;
 var FundSchema = new Schema({
   funder: {
     type: Schema.Types.ObjectId,
-    ref: 'Creator' // required: true
-
+    ref: 'Creator',
+    required: true
   },
   project: {
     type: Schema.Types.ObjectId,
-    ref: 'Project' // required: true
-
+    ref: 'Project',
+    required: true
   },
   amount: {
-    type: Number // required: true
-
+    type: Number,
+    required: true
   },
   customer: {},
   charge: {}

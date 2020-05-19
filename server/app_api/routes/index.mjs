@@ -144,7 +144,7 @@ router
     })
     .post(jsonParser, urlParser, passport.authenticate('jwt', { session: false }), upload.single('avatar'), (req, res) => {
         // getCreator(req, res);
-        console.log(req.file);
+        // console.log(req.file);
 
         creatorsCreate(req, res);
     });

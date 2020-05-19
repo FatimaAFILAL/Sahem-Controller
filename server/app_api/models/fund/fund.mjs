@@ -8,16 +8,16 @@ export const FundSchema = new Schema({
     funder: {
         type: Schema.Types.ObjectId,
         ref: 'Creator',
-        // required: true
+        required: true
     },
     project: {
         type: Schema.Types.ObjectId,
         ref: 'Project',
-        // required: true
+        required: true
     },
     amount: {
         type: Number,
-        // required: true
+        required: true
     },
     customer: {},
     charge: {}

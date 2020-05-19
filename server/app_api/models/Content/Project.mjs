@@ -13,11 +13,11 @@ const Schema = mongoose.Schema;
 export const ProjectSchema = new Schema({
     title: {
         type: String,
-        // required: true
+        required: true
     },
     category: {
         type: String,
-        // required: true
+        required: true
     },
     owner: {
         type: Schema.Types.ObjectId,
@@ -26,12 +26,17 @@ export const ProjectSchema = new Schema({
     },
     content: {
         type: String,
+        required: true
+        
     },
     description: {
         type: String,
+        required: true
+
     },
     fundGoal: {
         type: Number,
+        required: true
     },
     raisedFunds: {
         type: Number,
@@ -43,6 +48,7 @@ export const ProjectSchema = new Schema({
     // },
     endDate: {
         type: Date,
+        required: true
     },
     funders: [
         {

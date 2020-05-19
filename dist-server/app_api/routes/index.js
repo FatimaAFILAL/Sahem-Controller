@@ -168,7 +168,7 @@ router.route('/creators').get(function (req, res) {
   session: false
 }), _upload.upload.single('avatar'), function (req, res) {
   // getCreator(req, res);
-  console.log(req.file);
+  // console.log(req.file);
   (0, _Creators.creatorsCreate)(req, res);
 }); // .put(passport.authenticate('jwt', { session: false }), (req, res) => {
 //     getCreator(req, res);
